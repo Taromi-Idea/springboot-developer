@@ -14,6 +14,7 @@ if (deleteButton) {
     });
 }
 
+// 수정 기능
 const modifyButton = document.getElementById('modify-btn');
 
 if (modifyButton) {
@@ -35,6 +36,29 @@ if (modifyButton) {
             .then(() => {
                 alert('수정이 완료되었습니다.');
                 location.replace(`/articles/${id}`);
+            });
+    });
+}
+
+// 등록 기능
+const createButton = document.getElementById('create-btn'); // id가 create-btn인 엘리먼트
+
+if (createButton) {
+    // 클릭 이벤트가 감지되면 수정 API 호출
+    createButton.addEventListener('click', event => {
+        fetch(`/api/articles`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                title: document.getElementById('title').value,
+                content: document.getElementById('content').value
+            })
+        })
+            .then(() => {
+                alert('등록이 완료되었습니다.');
+                location.replace(`/articles`);
             });
     });
 }
